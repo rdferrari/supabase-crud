@@ -1,107 +1,123 @@
-@import '@fontsource/fira-mono';
-
 :root {
-	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	--font-mono: 'Fira Mono', monospace;
-	--color-bg-0: rgb(202, 216, 228);
-	--color-bg-1: hsl(209, 36%, 86%);
-	--color-bg-2: hsl(224, 44%, 95%);
-	--color-theme-1: #ff3e00;
-	--color-theme-2: #4075a6;
-	--color-text: rgba(0, 0, 0, 0.7);
-	--column-width: 42rem;
-	--column-margin-top: 4rem;
-	font-family: var(--font-body);
-	color: var(--color-text);
+	--background-color: #1C1C1C;
+	--color: #EDEDED;
+	--primary-color: #0EB2B9;
+	--error-color: #FF9B9B
+  }
+
+@font-face {
+	font-family: roboto-black;
+	src: url(./fonts/Roboto-Black.ttf);
+}
+
+@font-face {
+	font-family: roboto-regular;
+	src: url(./fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+	font-family: roboto-thin;
+	src: url(./fonts/Roboto-Regular.ttf);
 }
 
 body {
+	background-color: var(--background-color);
+	color: var(--color);
+	font-family: roboto-thin;
 	min-height: 100vh;
 	margin: 0;
-	background-attachment: fixed;
-	background-color: var(--color-bg-1);
-	background-size: 100vw 100vh;
-	background-image: radial-gradient(
-			50% 50% at 50% 50%,
-			rgba(255, 255, 255, 0.75) 0%,
-			rgba(255, 255, 255, 0) 100%
-		),
-		linear-gradient(180deg, var(--color-bg-0) 0%, var(--color-bg-1) 15%, var(--color-bg-2) 50%);
 }
 
-h1,
-h2,
-p {
-	font-weight: 400;
+h1 {
+	font-family: roboto-black;
+	color: var(--color);
+	font-size: 2rem;
 }
-
+h2 {
+	font-family: roboto-black;
+	color: var(--color);
+	font-size: 1rem;
+}
 p {
+	font-family: roboto-thin;
 	line-height: 1.5;
+	color: var(--color);
 }
 
 a {
-	color: var(--color-theme-1);
 	text-decoration: none;
+	color: var(--primary-color);
 }
 
 a:hover {
 	text-decoration: underline;
 }
 
-h1 {
-	font-size: 2rem;
-	text-align: center;
+label {
+	font-family: roboto-thin;
+	font-size: 12px;;
+	color: var(--color);
 }
 
-h2 {
-	font-size: 1rem;
+button {
+	cursor: pointer;
 }
 
-pre {
-	font-size: 16px;
-	font-family: var(--font-mono);
-	background-color: rgba(255, 255, 255, 0.45);
-	border-radius: 3px;
-	box-shadow: 2px 2px 6px rgb(255 255 255 / 25%);
-	padding: 0.5em;
-	overflow-x: auto;
-	color: var(--color-text);
-}
 
-.text-column {
-	display: flex;
-	max-width: 48rem;
-	flex: 0.6;
-	flex-direction: column;
-	justify-content: center;
-	margin: 0 auto;
+select {
+	font-family: roboto-thin;
+	background-color: var(--color);
+	color: var(--background-color);
+	width: 100%;
+	padding: 10px;
+	border-radius: 6px;
+	margin: 10px 0 30px 0;
 }
 
 input,
-button {
-	font-size: inherit;
-	font-family: inherit;
+textarea {
+	font-family: roboto-thin;
+	background-color: var(--color);
+	color: var(--background-color);
+	width: calc(100% - 25px);
+	padding: 10px;
+	border-radius: 6px;
+	margin: 10px 0 30px 0;
 }
 
-button:focus:not(:focus-visible) {
-	outline: none;
+.bt-primary {
+	background-color: var(--primary-color);
+	border: 1px solid #00E6F0;
+	border-radius: 6px;
+	color: #fff;
+	height: 30px;
+	padding: 0 15px;
+	width: 100%;
 }
 
-@media (min-width: 720px) {
-	h1 {
-		font-size: 2.4rem;
-	}
+.bt-secondary {
+	background-color: var(--color);
+	border: 1px solid #00E6F0;
+	border-radius: 6px;
+	color: var(--primary-color);
+	height: 30px;
+	padding: 0 15px;
 }
 
-.visually-hidden {
-	border: 0;
-	clip: rect(0 0 0 0);
-	height: auto;
-	margin: 0;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	width: 1px;
-	white-space: nowrap;
+.bt-text {
+	background-color: transparent;
+	border: none;
+	color: var(--primary-color);
+}
+
+.flex-container-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+  }
+
+  .error-message {
+	color: var(--error-color);
 }
