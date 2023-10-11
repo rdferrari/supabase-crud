@@ -14,6 +14,7 @@
 
 		supabase.auth.onAuthStateChange((_event, _session) => {
 			session = _session;
+			console.log(session);
 		});
 	});
 </script>
@@ -24,6 +25,9 @@
 	{#if !session}
 		<Auth />
 	{:else}
+		<button type="button" class="button block" on:click={() => supabase.auth.signOut()}>
+			Sign Out
+		</button>
 		<main>
 			<slot />
 		</main>

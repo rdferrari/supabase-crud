@@ -9,8 +9,10 @@
 	const handleSignIn = async () => {
 		try {
 			loading = true;
-			const { error } = await supabase.auth.signInWithPassword({ email, password });
+			const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 			if (error) throw error;
+
+			console.log('Signed in: ', data);
 			// alert('Check your email for login link!');
 		} catch (error) {
 			if (error instanceof Error) {
@@ -24,8 +26,10 @@
 	const handleSignUp = async () => {
 		try {
 			loading = true;
-			const { error } = await supabase.auth.signUp({ email, password });
+			const { data, error } = await supabase.auth.signUp({ email, password });
 			if (error) throw error;
+
+			console.log('Signed up: ', data);
 			// alert('Check your email for login link!');
 		} catch (error) {
 			if (error instanceof Error) {
