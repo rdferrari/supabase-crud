@@ -2,7 +2,8 @@
 	--background-color: #1C1C1C;
 	--color: #EDEDED;
 	--primary-color: #0EB2B9;
-	--error-color: #FF9B9B
+	--error-color: #FF9B9B;
+	--success-color: #BAFF9B;
   }
 
 @font-face {
@@ -120,4 +121,8 @@ textarea {
 
   .error-message {
 	color: var(--error-color);
+}
+
+.success-message {
+	color: var(--success-color);
 }

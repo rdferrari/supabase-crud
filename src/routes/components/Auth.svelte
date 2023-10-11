@@ -6,17 +6,20 @@
 	let password = '';
 	let isSigningUp = false;
 	let message = '';
+	let isError = false;
 
 	const handleSignIn = async () => {
 		try {
 			loading = true;
 			message = '';
+			isError = false;
 			const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 			if (error) throw error;
 
 			console.log('Signed in: ', data);
 		} catch (error) {
 			if (error instanceof Error) {
+				isError = true;
 				message = error.message;
 			}
 		} finally {
@@ -28,22 +31,28 @@
 		try {
 			loading = true;
 			message = '';
+			isError = false;
 			const { data, error } = await supabase.auth.signUp({ email, password });
 			if (error) throw error;
 
 			console.log('Signed up: ', data);
+			message = 'Check your email!';
 			// alert('Check your email for login link!');
 		} catch (error) {
 			if (error instanceof Error) {
-				alert(error.message);
+				isError = true;
+				message = error.message;
 			}
 		} finally {
 			loading = false;
 		}
 	};
 
-	const handleIsSignUp = () =>
+	const handleIsSignUp = () => {
 		isSigningUp === true ? (isSigningUp = false) : (isSigningUp = true);
+		message = '';
+		isError = false;
+	};
 </script>
 
 <div class="flex-container-center">
@@ -78,7 +87,7 @@
 				</button>
 			</div>
 		</form>
-		<p class="error-message">{message}</p>
+		<p class={isError ? 'error-message' : 'success-message'}>{message}</p>
 		<div>
 			<p>
 				{isSigningUp ? 'Have an accound ' : "Don't have an account?"}
@@ -97,8 +106,8 @@
 		padding: 0 20px;
 	}
 
-	@media (min-width: 720px) {
+	/* @media (min-width: 720px) {
 		.auth-container {
 		}
-	}
+	} */
 </style>
