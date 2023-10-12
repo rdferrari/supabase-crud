@@ -7,19 +7,25 @@
 	import ForgotPassword from './components/ForgotPassword.svelte';
 	import ResetPassword from './components/ResetPassword.svelte';
 	import Menu from './components/Menu.svelte';
+	import sessionAuth from '../lib/session';
 
 	let session: AuthSession | null;
 	let event: string | undefined;
 	let email: string | undefined;
-	let id: string | undefined;
+	let user_id: string | undefined;
 	let isForgotPassword = false;
+
+	function updateSessionAuth() {
+		$sessionAuth = session;
+	}
 
 	onMount(() => {
 		supabase.auth.getSession().then(({ data }) => {
 			session = data.session;
 			email = session.user.email;
-			id = session.user.id;
-			console.log(email, id);
+			user_id = session.user.id;
+			console.log(email, user_id);
+			updateSessionAuth();
 		});
 
 		supabase.auth.onAuthStateChange((_event, _session) => {
@@ -27,8 +33,10 @@
 			event = _event;
 			console.log(session, event);
 			email = session.user.email;
-			id = session.user.id;
-			console.log(email, id);
+			user_id = session.user.id;
+			console.log(email, user_id);
+			updateSessionAuth();
+			console.log($sessionAuth);
 		});
 	});
 

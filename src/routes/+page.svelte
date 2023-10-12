@@ -12,6 +12,5 @@
 <div class="flex-container-center">
 	<div class="content-container">
 		<h1>Happy hacking</h1>
-		<a href="/about">About</a>
 	</div>
 </div>

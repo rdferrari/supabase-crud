@@ -120,6 +120,13 @@ textarea {
 	height: 100vh;
   }
 
+  .flex-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 80px;
+  }
+
   .error-message {
 	color: var(--error-color);
 }
