@@ -4,10 +4,12 @@
 	import { supabase } from './supabaseClient';
 	import type { AuthSession } from '@supabase/supabase-js';
 	import Auth from './components/Auth.svelte';
+	import ForgotPassword from './components/ForgotPassword.svelte';
 
 	let session: AuthSession | null;
 	let email: string | undefined;
 	let id: string | undefined;
+	let isForgotPassword = false;
 
 	onMount(() => {
 		supabase.auth.getSession().then(({ data }) => {
@@ -25,11 +27,18 @@
 			console.log(email, id);
 		});
 	});
+
+	const handleIsForgotPassword = () =>
+		isForgotPassword === true ? (isForgotPassword = false) : (isForgotPassword = true);
 </script>
 
 <div>
 	{#if !session}
-		<Auth />
+		{#if isForgotPassword === false}
+			<Auth {handleIsForgotPassword} />
+		{:else}
+			<ForgotPassword {handleIsForgotPassword} />
+		{/if}
 	{:else}
 		<div class="signout-container">
 			<button type="button" class="bt-primary" on:click={() => supabase.auth.signOut()}>

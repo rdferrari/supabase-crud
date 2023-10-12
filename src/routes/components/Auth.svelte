@@ -7,6 +7,7 @@
 	let isSigningUp = false;
 	let message = '';
 	let isError = false;
+	export let handleIsForgotPassword = () => {};
 
 	const handleSignIn = async () => {
 		try {
@@ -94,7 +95,22 @@
 				<button class="bt-text" on:click={handleIsSignUp}
 					>{isSigningUp ? 'Sign In Now' : 'Sign Up Now'}</button
 				>
+				or
+				<button on:click={handleIsForgotPassword} class="bt-text">Forgot Password?</button>
 			</p>
 		</div>
 	</div>
 </div>
+
+<style>
+	.secondary-info {
+		color: var(--grey);
+		font-size: 12px;
+	}
+
+	.forgot-container {
+		margin-top: -30px;
+		width: 100%;
+		text-align: right;
+	}
+</style>
