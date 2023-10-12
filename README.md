@@ -1,22 +1,26 @@
-# create-svelte
+# Supase + Svelte Kit Auth
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+Supabase and Svelte authorization boilerplate with sign up and in with password, and forgot password.
 
 ```bash
 # create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+npm install
 ```
 
-## Developing
+More info https://kit.svelte.dev/
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Supabase client
+
+Create a .env file in the root folder with your YOUR_URL and YOUR_KEY.
+
+```bash
+PUBLIC_SUPABASE_URL=YOUR_URL
+PUBLIC_SUPABASE_ANON_KEY=YOUR_KEY
+```
+
+More information https://supabase.com/docs/reference/javascript/installing
+
+## start a development server
 
 ```bash
 npm run dev
