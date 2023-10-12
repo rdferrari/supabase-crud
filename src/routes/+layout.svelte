@@ -6,6 +6,7 @@
 	import Auth from './components/Auth.svelte';
 	import ForgotPassword from './components/ForgotPassword.svelte';
 	import ResetPassword from './components/ResetPassword.svelte';
+	import Menu from './components/Menu.svelte';
 
 	let session: AuthSession | null;
 	let event: string | undefined;
@@ -52,6 +53,7 @@
 		{#if event === 'PASSWORD_RECOVERY'}
 			<ResetPassword />
 		{:else}
+			<Menu />
 			<slot />
 		{/if}
 	{/if}
