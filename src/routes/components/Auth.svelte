@@ -56,7 +56,7 @@
 </script>
 
 <div class="flex-container-center">
-	<div class="auth-container">
+	<div class="content-container">
 		<h1>{isSigningUp ? 'Get started' : 'Welcome back'}</h1>
 		<p>{isSigningUp ? 'Create a new account' : 'Sign In to your account'}</p>
 		<form on:submit|preventDefault={isSigningUp ? handleSignUp : handleSignIn}>
@@ -98,16 +98,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.auth-container {
-		width: 100%;
-		max-width: 400px;
-		padding: 0 20px;
-	}
-
-	/* @media (min-width: 720px) {
-		.auth-container {
-		}
-	} */
-</style>
