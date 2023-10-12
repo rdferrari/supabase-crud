@@ -5,8 +5,10 @@
 	import type { AuthSession } from '@supabase/supabase-js';
 	import Auth from './components/Auth.svelte';
 	import ForgotPassword from './components/ForgotPassword.svelte';
+	import ResetPassword from './components/ResetPassword.svelte';
 
 	let session: AuthSession | null;
+	let event: string | undefined;
 	let email: string | undefined;
 	let id: string | undefined;
 	let isForgotPassword = false;
@@ -21,7 +23,8 @@
 
 		supabase.auth.onAuthStateChange((_event, _session) => {
 			session = _session;
-			console.log(session);
+			event = _event;
+			console.log(session, event);
 			email = session.user.email;
 			id = session.user.id;
 			console.log(email, id);
@@ -46,7 +49,11 @@
 			</button>
 		</div>
 
-		<slot />
+		{#if event === 'PASSWORD_RECOVERY'}
+			<ResetPassword />
+		{:else}
+			<slot />
+		{/if}
 	{/if}
 </div>
 

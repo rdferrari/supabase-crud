@@ -12,10 +12,11 @@
 			loading = true;
 			message = '';
 			isError = false;
-			const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+			const { data, error } = await supabase.auth.resetPasswordForEmail(email);
 			if (error) throw error;
+			message = 'Please verify your email!';
 
-			console.log('Signed in: ', data);
+			console.log('Reset Password: ', data);
 		} catch (error) {
 			if (error instanceof Error) {
 				isError = true;

@@ -101,16 +101,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.secondary-info {
-		color: var(--grey);
-		font-size: 12px;
-	}
-
-	.forgot-container {
-		margin-top: -30px;
-		width: 100%;
-		text-align: right;
-	}
-</style>
