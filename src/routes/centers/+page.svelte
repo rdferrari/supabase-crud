@@ -3,6 +3,8 @@
 	import { supabase } from '../supabaseClient';
 	import type { T } from 'vitest/dist/types-198fd1d9';
 	import sessionAuth from '../../lib/session';
+	import Form from './Form.svelte';
+	import List from './List.svelte';
 
 	let centersData: Array<T> | null;
 	let loadingList = false;
@@ -10,11 +12,7 @@
 	let endIndex = 9;
 	let maxListItems = endIndex + 1;
 	console.log(startIndex, endIndex);
-	let loadingInsert = false;
-	let isError = false;
 
-	let name: string = '';
-	let message: string = '';
 	let user_id: string;
 
 	let session;
@@ -45,31 +43,6 @@
 		}
 	};
 
-	const insertCenter = async () => {
-		try {
-			loadingInsert = true;
-
-			const { data, error } = await supabase.from('centers').insert([{ user_id, name }]).select();
-
-			if (error) throw error;
-
-			loadingInsert = false;
-			isError = false;
-			console.log(data);
-			message = 'Center created';
-
-			centersData = [data[0], ...centersData];
-			name = '';
-		} catch (error) {
-			loadingInsert = false;
-			console.log(error);
-			isError = true;
-			if (error.code === '23514') {
-				message = "Center's name must be greater than 3 char!";
-			}
-		}
-	};
-
 	const handleNext = () => {
 		startIndex = endIndex + 1;
 		endIndex = endIndex + maxListItems;
@@ -96,41 +69,7 @@
 
 <div class="flex-container">
 	<div class="content-container">
-		<h1>Centers CRUD</h1>
-		<h2>Insert New Center</h2>
-		<form on:submit|preventDefault={insertCenter}>
-			<div>
-				<label for="email">Name</label>
-				<input
-					id="name"
-					class="inputField"
-					type="text"
-					placeholder="Center's name"
-					bind:value={name}
-				/>
-			</div>
-
-			<div>
-				<button class="bt-primary" type="submit" disabled={loadingInsert}>
-					<span>{loadingInsert ? 'Loading' : 'New Center'}</span>
-				</button>
-			</div>
-		</form>
-		<p class={isError ? 'error-message' : 'success-message'}>{message}</p>
-		<h2>Centers List</h2>
-		{#if centersData?.length === 0}
-			<p>List is empty</p>
-		{:else if centersData}
-			{#each centersData as center}
-				<p>{center.name}</p>
-			{/each}
-		{/if}
-
-		{#if startIndex !== 0}
-			<button class="bt-text" on:click={handlePrevious}>previous</button>
-		{/if}
-		{#if centersData?.length === maxListItems}
-			<button class="bt-text" on:click={handleNext}>next</button>
-		{/if}
+		<Form {supabase} {user_id} {centersData} />
+		<List {centersData} {handlePrevious} {handleNext} {startIndex} {maxListItems} />
 	</div>
 </div>
