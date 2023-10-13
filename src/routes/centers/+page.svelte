@@ -6,8 +6,10 @@
 
 	let centersData: Array<T> | null;
 	let loadingList = false;
-	let startList = 0;
-	let endList = 9;
+	let startIndex = 0;
+	let endIndex = 9;
+	let maxListItems = endIndex + 1;
+	console.log(startIndex, endIndex);
 	let loadingInsert = false;
 	let isError = false;
 
@@ -30,7 +32,7 @@
 			let { data: centers, error } = await supabase
 				.from('centers')
 				.select('*')
-				.range(startList, endList);
+				.range(startIndex, endIndex);
 
 			if (error) throw error;
 
@@ -52,12 +54,34 @@
 			if (error) throw error;
 
 			loadingInsert = false;
+			isError = false;
 			console.log(data);
 			message = 'Center created';
+
+			centersData = [data[0], ...centersData];
+			name = '';
 		} catch (error) {
 			loadingInsert = false;
 			console.log(error);
+			isError = true;
+			if (error.code === '23514') {
+				message = "Center's name must be greater than 3 char!";
+			}
 		}
+	};
+
+	const handleNext = () => {
+		startIndex = endIndex + 1;
+		endIndex = endIndex + maxListItems;
+		readCenters();
+		console.log(startIndex, endIndex);
+	};
+
+	const handlePrevious = () => {
+		endIndex = startIndex - 1;
+		startIndex = startIndex - maxListItems;
+		readCenters();
+		console.log(startIndex, endIndex);
 	};
 
 	onMount(() => {
@@ -100,6 +124,13 @@
 			{#each centersData as center}
 				<p>{center.name}</p>
 			{/each}
+		{/if}
+
+		{#if startIndex !== 0}
+			<button class="bt-text" on:click={handlePrevious}>previous</button>
+		{/if}
+		{#if centersData?.length === maxListItems}
+			<button class="bt-text" on:click={handleNext}>next</button>
 		{/if}
 	</div>
 </div>
