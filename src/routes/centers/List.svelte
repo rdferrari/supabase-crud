@@ -35,11 +35,6 @@
 			});
 
 			centersData = newCentersData;
-
-			// const newData = centersData?.map((center) => center.id !== itemDeletedId);
-			// console.log(newData);
-
-			// centersData = [data[0], ...centersData];
 		} catch (error) {
 			loading = false;
 			console.log(error);
