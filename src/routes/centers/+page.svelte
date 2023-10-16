@@ -30,6 +30,7 @@
 			let { data: centers, error } = await supabase
 				.from('centers')
 				.select('*')
+				.eq('is_active', 'TRUE')
 				.range(startIndex, endIndex);
 
 			if (error) throw error;
@@ -64,7 +65,7 @@
 
 <svelte:head>
 	<title>Centers</title>
-	<meta name="description" content="About this app" />
+	<meta name="description" content="Centers CRUD page" />
 </svelte:head>
 
 <div class="flex-container">
