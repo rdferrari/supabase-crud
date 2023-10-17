@@ -8,7 +8,9 @@
 	export let handlePrevious = () => {};
 	export let handleNext = () => {};
 	export let readCenters = () => {};
+	export let handleDetail = () => {};
 	export let searchInput;
+	export let selectedDetailId;
 
 	console.log(searchInput);
 
@@ -65,7 +67,10 @@
 	{#each centersData as center}
 		<div class="item-container">
 			<p>{center.name}</p>
-			<button on:click={updateCenter(center.id)}>delete</button>
+			<div class="bt-container">
+				<button class="bt-text" on:click={handleDetail(center.id)}>details</button>
+				<button class="bt-text" on:click={updateCenter(center.id)}>delete</button>
+			</div>
 		</div>
 	{/each}
 {/if}
@@ -81,5 +86,9 @@
 	.item-container {
 		display: flex;
 		justify-content: space-between;
+		border-bottom: 1px solid #939393;
+	}
+	.bt-container {
+		margin-top: 20px;
 	}
 </style>
