@@ -12,6 +12,8 @@
 	let endIndex = 9;
 	let maxListItems = endIndex + 1;
 	console.log(startIndex, endIndex);
+	let searchInput: string = '';
+	console.log(searchInput);
 
 	let user_id: string;
 
@@ -30,7 +32,9 @@
 			let { data: centers, error } = await supabase
 				.from('centers')
 				.select('*')
+				.order('inserted_at', { ascending: false })
 				.eq('is_active', 'TRUE')
+				.like('name', `%${searchInput}%`)
 				.range(startIndex, endIndex);
 
 			if (error) throw error;
@@ -71,6 +75,14 @@
 <div class="flex-container">
 	<div class="content-container">
 		<Form {supabase} {user_id} {centersData} />
-		<List {centersData} {handlePrevious} {handleNext} {startIndex} {maxListItems} />
+		<List
+			{centersData}
+			{handlePrevious}
+			{handleNext}
+			{startIndex}
+			{maxListItems}
+			bind:searchInput
+			on:input={readCenters}
+		/>
 	</div>
 </div>

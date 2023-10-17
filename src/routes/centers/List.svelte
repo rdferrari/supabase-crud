@@ -7,6 +7,10 @@
 	export let centersData: Array<T> | null;
 	export let handlePrevious = () => {};
 	export let handleNext = () => {};
+	export let readCenters = () => {};
+	export let searchInput;
+
+	console.log(searchInput);
 
 	let loading = false;
 	let isError = false;
@@ -50,6 +54,14 @@
 {#if centersData?.length === 0}
 	<p>List is empty</p>
 {:else if centersData}
+	<input
+		type="text"
+		id="search-field"
+		placeholder="Enter Search Term"
+		autocomplete="off"
+		bind:value={searchInput}
+		on:input
+	/>
 	{#each centersData as center}
 		<div class="item-container">
 			<p>{center.name}</p>
