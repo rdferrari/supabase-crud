@@ -64,15 +64,17 @@
 		bind:value={searchInput}
 		on:input
 	/>
-	{#each centersData as center}
-		<div class="item-container">
-			<p>{center.name}</p>
-			<div class="bt-container">
-				<button class="bt-text" on:click={handleDetail(center.id)}>details</button>
-				<button class="bt-text" on:click={updateCenter(center.id)}>delete</button>
+	<div class="list-container">
+		{#each centersData as center}
+			<div class="item-container">
+				<p>{center.name}</p>
+				<div class="bt-container">
+					<button class="bt-text" on:click={handleDetail(center.id)}>details</button>
+					<button class="bt-text" on:click={updateCenter(center.id)}>delete</button>
+				</div>
 			</div>
-		</div>
-	{/each}
+		{/each}
+	</div>
 {/if}
 
 {#if startIndex !== 0}
@@ -83,6 +85,9 @@
 {/if}
 
 <style>
+	.list-container {
+		margin-bottom: 60px;
+	}
 	.item-container {
 		display: flex;
 		justify-content: space-between;

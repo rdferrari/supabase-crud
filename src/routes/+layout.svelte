@@ -73,5 +73,6 @@
 		right: 20px;
 		top: 20px;
 		width: 100px;
+		z-index: 10;
 	}
 </style>
